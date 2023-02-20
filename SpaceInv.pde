@@ -1,8 +1,9 @@
 
-PImage img;
+//PImage img;
 
 float x,y,x2,y2,x3,y3;
-float ex,ey,ex2,ey2;
+float bx,by,bx2,by2;
+float ex,ey;
 
 boolean dPressed = false;
 boolean aPressed = false;
@@ -13,6 +14,8 @@ boolean uPressed = false;
 boolean shoot = false;
 boolean shoot2 = false;
 
+int reload;
+
 PFont font;
 
 float speed;
@@ -20,13 +23,15 @@ float speed2;
 
 boolean colliding;
 
+float step;
+
 void setup()
 { 
   //screen size
   size(displayWidth,displayHeight);
   
   //background image
-  img = loadImage("space.jpg");
+  //img = loadImage("space.jpg");
   
   //player 1's starting position
   x=width/4;
@@ -38,20 +43,27 @@ void setup()
   
   //bullet1 speed
   speed=40;
-  ex = x;
-  ey = y;
+  bx = x+30;
+  by = y+5;
   
   //bullet2 speed
   speed2=40;
-  ex2 = x2;
-  ey2=y2;
+  bx2 = x2;
+  by2=y2;
+  
+  
+  //enemy movement
+  step = 5;
+  ex=width/17;
+  ey=height/9;
 }
 
 
 void draw(){
   
   //background
-  image(img,0,0,width,height);
+  background(0);
+  //image(img,0,0,width,height);
   
 
   drawText();
@@ -60,6 +72,8 @@ void draw(){
   enemy1();
   bullet1();
   bullet2();
+  
+
   
 } 
 
@@ -116,20 +130,31 @@ void player2(){
   //Starting location and shape of the bullet for player 1 
   stroke(255);
   fill(255,255,255);
-  rect(ex+30,ey+5,2,5);
+  rect(bx,by,2,5);
 
    //boolean to see if w was pressed
   if(wPressed){
     shoot = true;
+    reload = 0;
   }
   //if that w was pressed the bullet is released
-  else if(shoot){
-    ey=ey-speed;
+  else if(shoot && reload == 0){
+   reload = 1;
+    by=by-speed;
+  
   }
   //moves the location of the bullet to where the player is
   else{
-    ex=x;
-    ey=y;
+    bx=x;
+    by=y;
+  }
+  if(by >= displayHeight){
+   reload = 2;
+  }
+  if(reload == 2){
+    bx = x;
+    by = y;
+    reload = 0;
   }
   
  }
@@ -139,43 +164,37 @@ void player2(){
    //Starting location and shape of the bullet for player 2 
   stroke(255);
   fill(255,255,255);
-  rect(ex2+30,ey2+5,2,5);
+  rect(bx2+30,by2+5,2,5);
   //boolean to see if the up arrow was pressed
   if(uPressed){
     shoot2 = true;
   }
    //if that up arrow was pressed the bullet is released
   else if(shoot2){
-    ey2=ey2-speed2;
+    by2=by2-speed2;
   }
   //moves the location of the bullet to where the player is
   else{
-    ex2=x2;
-    ey2=y2;
+    bx2=x2;
+    by2=y2;
   }
   }
   
 
 void enemy1(){
-  stroke(0);
-  fill(255,255,255);
-  rect(width/17,height/9,70,70);
   
   stroke(0);
   fill(255,255,255);
-  rect(width/7,height/9,70,70);
+  rect(ex,ey,70,70);
   
-  stroke(0);
-  fill(255,255,255);
-  rect(width/4.5,height/9,70,70);
   
-  stroke(0);
-  fill(255,255,255);
- rect(width/3.4,height/9,70,70);
+  if(step == 5 && ex <= 750){
+    ex=ex+1;
+  }
+  else if(ex ==750){
+    ey=ey-1;
+  }
   
-  stroke(0);
-  fill(255,255,255);
-  rect(width/2.7,height/9,70,70);
   
 }
 
