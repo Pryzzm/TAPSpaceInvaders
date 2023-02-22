@@ -22,13 +22,17 @@ float speed;
 float speed2;
 
 boolean colliding;
+Enemy f = new Enemy(100,100);
+
+ArrayList<Enemy> Enemies1 = new ArrayList<Enemy>();
+ArrayList<Enemy> Enemies2 = new ArrayList<Enemy>();
+
 
 float step;
-
 void setup()
 { 
   //screen size
-  size(displayWidth,displayHeight);
+  fullScreen();
   
   //background image
   //img = loadImage("space.jpg");
@@ -43,8 +47,8 @@ void setup()
   
   //bullet1 speed
   speed=40;
-  bx = x+30;
-  by = y+5;
+  bx = x;
+  by = y;
   
   //bullet2 speed
   speed2=40;
@@ -56,6 +60,10 @@ void setup()
   step = 5;
   ex=width/17;
   ey=height/9;
+  
+  for(int i=0; i<=15; i++){
+    int rowPos = 0;
+}
 }
 
 
@@ -65,16 +73,13 @@ void draw(){
   background(0);
   //image(img,0,0,width,height);
   
-
   drawText();
   player1();
   player2();
-  enemy1();
   bullet1();
   bullet2();
-  
-
-  
+  f.update();
+ 
 } 
 
 void drawText(){
@@ -99,6 +104,8 @@ void player1(){
   stroke(0);
   fill(255,255,255);
   rect(x,y,60,60);
+  rect(x-40,y+40,150,20);
+  //rect(x+25,y-20,10,20);
   
   //player 1's movement
   if(aPressed && x>=displayWidth*.03){
@@ -107,6 +114,7 @@ void player1(){
   else if(dPressed && x<=displayWidth*.40){
     x=x+15;
   }
+
   
 }
 
@@ -130,32 +138,31 @@ void player2(){
   //Starting location and shape of the bullet for player 1 
   stroke(255);
   fill(255,255,255);
-  rect(bx,by,2,5);
+  rect(bx+30,by+5,2,5);
 
    //boolean to see if w was pressed
   if(wPressed){
     shoot = true;
-    reload = 0;
+    
   }
   //if that w was pressed the bullet is released
-  else if(shoot && reload == 0){
-   reload = 1;
+  if(shoot){
     by=by-speed;
-  
   }
-  //moves the location of the bullet to where the player is
-  else{
-    bx=x;
+  //reloading
+  if(by<=80){
     by=y;
+    bx=x;
+    shoot = false;
   }
-  if(by >= displayHeight){
-   reload = 2;
+//keeps bullet with the player
+  if(aPressed && bx>=displayWidth*.03){
+    bx=bx-15;
   }
-  if(reload == 2){
-    bx = x;
-    by = y;
-    reload = 0;
+  else if(dPressed && bx<=displayWidth*.40){
+    bx=bx+15;
   }
+
   
  }
  
@@ -170,33 +177,44 @@ void player2(){
     shoot2 = true;
   }
    //if that up arrow was pressed the bullet is released
-  else if(shoot2){
+  if(shoot2){
     by2=by2-speed2;
   }
-  //moves the location of the bullet to where the player is
-  else{
-    bx2=x2;
+  //reloading
+  if(by2<=20){
     by2=y2;
+    bx2=x2;
+    shoot2 = false;
+  }
+  //keeps bullet with the player when not being fired
+  if(lPressed && bx2>=displayWidth*.55){
+    bx2=bx2-15;
+  }
+  else if(rPressed && bx2<=displayWidth*.94){
+    bx2=bx2+15;
   }
   }
   
+//Enemy
+class Enemy{
+  
+  int x, y;
+  Enemy(int ex, int ey){
+    x = ex;
+    y = ey;
+  }
+ 
+  void update(){
+stroke(0);
+    fill(255,255,255);
+    rect(ex,ey,60,60);
+    if((by<=ey+5 && by>=ey-5) && (bx<=ex+50 && bx>=ex-50)){
+    ey=ey-40000;
+    }
+  }
+  }
 
-void enemy1(){
-  
-  stroke(0);
-  fill(255,255,255);
-  rect(ex,ey,70,70);
-  
-  
-  if(step == 5 && ex <= 750){
-    ex=ex+1;
-  }
-  else if(ex ==750){
-    ey=ey-1;
-  }
-  
-  
-}
+
 
 
 
