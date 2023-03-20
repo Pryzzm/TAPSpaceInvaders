@@ -34,9 +34,9 @@ Enemy alien1 = new Enemy(100,100);Enemy alien2 = new Enemy(250,100);Enemy alien3
 Enemy alien6 = new Enemy(100,300);Enemy alien7 = new Enemy(250,300);Enemy alien8 = new Enemy(400,300);Enemy alien9 = new Enemy(550,300);Enemy alien10 = new Enemy(700,300);
 
 Enemy2 [] enemies2 = new Enemy2[16];
-Enemy2 alien1b = new Enemy2(1000,100);Enemy2 alien2b = new Enemy2(1150,100);Enemy2 alien3b = new Enemy2(1300,100);Enemy2 alien4b = new Enemy2(1450,100);Enemy2 alien5b = new Enemy2(1600,100);
+Enemy2 alien1b = new Enemy2(1150,100);Enemy2 alien2b = new Enemy2(1300,100);Enemy2 alien3b = new Enemy2(1450,100);Enemy2 alien4b = new Enemy2(1600,100);Enemy2 alien5b = new Enemy2(1750,100);
 
-Enemy2 alien6b = new Enemy2(1000,300);Enemy2 alien7b = new Enemy2(1150,300);Enemy2 alien8b = new Enemy2(1300,300);Enemy2 alien9b = new Enemy2(1450,300);Enemy2 alien10b = new Enemy2(1600,300);
+Enemy2 alien6b = new Enemy2(1150,300);Enemy2 alien7b = new Enemy2(1300,300);Enemy2 alien8b = new Enemy2(1450,300);Enemy2 alien9b = new Enemy2(1600,300);Enemy2 alien10b = new Enemy2(1750,300);
 
 
 
@@ -122,13 +122,19 @@ void draw(){
   drawText();
 } 
 
+void startGame(){}
+void restart(){
+ if(tapPressed && score == 1000 || score2 == 1000){
+ 
+ }
+}
 
 
 void drawText(){
   //player 1 and player 2 divider
   stroke(255);
   strokeWeight(5);
- line(displayHeight-180,0,displayHeight-180,5000);
+ line(displayHeight-120,0,displayHeight-120,5000);
   
   //Score and lives for player 1
  textSize(50);
@@ -176,16 +182,14 @@ void player1(){
   //player 1 object
   stroke(0);
   fill(255,255,255);
-  //rect(x,y,60,60);
   image(imgGun,x,y,150,100);
-  //rect(x-40,y+40,150,20);
-  //rect(x+25,y-20,10,20);
+  
   
   //player 1's movement
   if(aPressed && x>=displayWidth*.03){
     x=x-15;
   }
-  else if(dPressed && x<=displayWidth*.38){
+  else if(dPressed && x<=displayWidth*.40){
     x=x+15;
   }
 
@@ -201,7 +205,7 @@ void player2(){
   
   
   //player 2's movement
-  if(lPressed && x2>=displayWidth*.50){
+  if(lPressed && x2>=displayWidth*.53){
     x2=x2-15;
   }
   else if(rPressed && x2<=displayWidth*.90){
@@ -234,7 +238,7 @@ void player2(){
   if(aPressed && bx>=displayWidth*.03 && by>=700){
     bx=bx-15;
   }
-  else if(dPressed && bx<=displayWidth*.38 && by>=700){
+  else if(dPressed && bx<=displayWidth*.40 && by>=700){
     bx=bx+15;
   }
 
@@ -263,7 +267,7 @@ void player2(){
     shoot2 = false;
   }
   //keeps bullet with the player when not being fired
-  if(lPressed && bx2>=displayWidth*.50 && by2>=700){
+  if(lPressed && bx2>=displayWidth*.53 && by2>=700){
     bx2=bx2-15;
   }
   else if(rPressed && bx2<=displayWidth*.90 && by2>=700){
@@ -333,10 +337,10 @@ class Enemy2{
    
    //moves alien horizontally
    ex2=ex2+alienSpeed1xy;
-   if(ex2>1700){ ex2=alienSpeed1xy=-alienSpeed1xy; ex2=900;}
+   if(ex2>1800){ ex2=alienSpeed1xy=-alienSpeed1xy; ex2=1000;}
    //moves alien vertically
    ey2=ey2+alienSpeed1yy;
-   if(ey2>500) ey2=alienSpeed1yy=-alienSpeed1yy;
+   if(ey2>400) ey2=alienSpeed1yy=-alienSpeed1yy;
    //ey=ey+alienSpeed1y; if(ey>5000 && ey<50) alienSpeed1y=-alienSpeed1y;
   }
   
@@ -352,11 +356,8 @@ class Enemy2{
    }
 }
 
-void restart(){
- if(tapPressed && score == 1000 || score2 == 1000){
- 
- }
-}
+
+
 
 void keyPressed(){
   //player 1's movement
