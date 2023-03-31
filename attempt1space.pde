@@ -1,5 +1,5 @@
 
-PImage img,imgAlien,imgAlien2,imgGun,imgGun2;
+PImage img,imgAlien,imgAlien2,imgGun,imgGun2,startScreen,p2Wins,p1Wins;
 
 float x,y,x2,y2,x3,y3;
 float bx,by,bx2,by2;
@@ -14,10 +14,11 @@ boolean rPressed = false;
 boolean lPressed = false;
 boolean wPressed = false;
 boolean uPressed = false;
-boolean tapPressed = false;
+boolean restartPressed = false;
 boolean shoot = false;
 boolean shoot2 = false;
 
+int gameTime = 0;
 
 int reload;
 
@@ -52,6 +53,9 @@ void setup()
   imgAlien2 = loadImage("alienSprite2.png");
   imgGun =loadImage("player1Ship.png");
   imgGun2 = loadImage("player2Ship.png");
+  startScreen = loadImage("welcomescreenW.png");
+  p1Wins= loadImage("p1Wins2.png");
+  p2Wins= loadImage("p2Wins2.png");
   
   //player 1's starting position
   x=width/4;
@@ -85,8 +89,25 @@ void draw(){
   //background
   background(0);
   //image(img,0,0,width,height);
-  
+  if(gameTime == 0){
+  startGame();}
+  else if(gameTime ==1){
+    playingGame();
+    
+  }
+
  
+
+} 
+
+void startGame(){
+    background(0);
+    stroke(0);
+    fill(255,255,255);
+    image(startScreen,ex*4,ey,1000,1000);
+   
+}
+void playingGame(){
   player1();
   player2();
   bullet1();
@@ -120,13 +141,31 @@ void draw(){
  
  
   drawText();
-} 
-
-void startGame(){}
-void restart(){
- if(tapPressed && score == 1000 || score2 == 1000){
+  
+  if(score == 1000 || score2==1000 && restartPressed == true){
+    
+    score =0;
+    score2=0;
+     shoot=true;
+     shoot2=true;
+     
  
- }
+  }
+}
+
+
+
+
+void mousePressed(){
+  if(gameTime==0){
+    playingGame();
+    gameTime=1;
+  }
+}
+void mouseReleased(){
+  if(gameTime==1){
+    playingGame();
+  }
 }
 
 
@@ -149,31 +188,21 @@ void drawText(){
  
  //adds a pop up that displays that player 1 won
   if(score == 1000 && score2 != 1000){
-    rect(width/3.4,height/3,700,300);
+    //rect(width/3.4,height/3,700,300);
     fill(255,255,255);
     textSize(100);
     fill(0);
-    text("Player 1 Wins!!!",width/3.2,height/2);
-    
-    fill(0);
-    textSize(40);
-    text("Press TAB to restart!", width/2.5,height/1.7);
-    
-    //if(tapPressed){
-    //reset();
- // }
+    image(p1Wins,width/6.5,height/3.5);
+   
   }
   
   //adds a pop up that displays that player 2 won
   if(score2 == 1000 && score != 1000){
-    rect(width/3.4,height/3,700,300);
     fill(255,255,255);
     textSize(100);
     fill(0);
-    text("Player 2 Wins!!!",width/3.2,height/2);
-    fill(0);
-    textSize(40);
-    text("Press TAB to restart!", width/2.5,height/1.7);
+    image(p2Wins,width/6.5,height/3.5);
+  
   }
  
 }
@@ -226,7 +255,7 @@ void player2(){
   }
   //if that w was pressed the bullet is released
   if(shoot){
-    by=by-speed*.5;
+    by=by-speed*.3;
   }
   //reloading
   if(by<=80){
@@ -258,7 +287,7 @@ void player2(){
   }
    //if that up arrow was pressed the bullet is released
   if(shoot2){
-    by2=by2-speed2*.5;
+    by2=by2-speed2*.3;
   }
   //reloading
   if(by2<=20){
@@ -322,9 +351,6 @@ class Enemy2{
    float ex2, ey2;
   float alienSpeed1xy,alienSpeed1yy;
  Enemy2(int a, int b){ex2=a;ey2=b;}
- //Enemy(int a, int b,int c){x=a;y=b;speed=c;}
-    
-  
  
   void display(){
     stroke(0);
@@ -391,8 +417,9 @@ void keyPressed(){
   if (keyCode == UP){
       uPressed = true;
   }
-  if(keyCode == TAB){
-    tapPressed = true;
+  if(key == 'r'){
+    restartPressed = true;
+ 
   }
  
 }
@@ -427,7 +454,8 @@ void keyReleased(){
   if (keyCode == UP){
       uPressed = false;
   }
-  if(keyCode == TAB){
-    tapPressed = false;
+  if(key == 'r'){
+    restartPressed = false;
+   
   }
 }
