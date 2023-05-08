@@ -15,19 +15,15 @@ In this project, we created a simple version of Space Invaders using Processing.
 * Haniel Villarreal
 * Jaehyun Na
 
-Put team photo (link to the one in the media/ folder)
+![Team!](https://github.com/Pryzzm/TAPSpaceInvaders/blob/main/Tap%20Media/Create.jpg)
 
 Advisors: Dr. Xin Xu and Dr. Wei Jin
 
 ## Our Work
 
-Publications [put formatted entry as showed in the ResumeTemplate provided to you on D2L]
-
-CCSC abstract –
+[Paper](https://github.com/Pryzzm/TAPSpaceInvaders/blob/main/Tap%20Documents/Introducing%20Java%20Programming%20Concepts%20through%20Making%20a%20Retro-style%20Game.docx)
 
 CREATE Symposium Poster, Nov. 21, 2019, GGC.
-
-Outreach Activities [put formatted entry as showed in the ResumeTemplate provided to you on D2L]
 
 Super Saturday Series (S3), Nov 9, GGC – middle and high school girls to promote IT and STEM career
 
