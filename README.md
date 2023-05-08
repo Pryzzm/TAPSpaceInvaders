@@ -19,7 +19,7 @@ Put team photo (link to the one in the media/ folder)
 
 Advisors: Dr. Xin Xu and Dr. Wei Jin
 
-#Our Work
+## Our Work
 
 Publications [put formatted entry as showed in the ResumeTemplate provided to you on D2L]
 
@@ -35,11 +35,11 @@ Tap Expo, Oct 10, GGC – To promote IT field and the TAP program to college stu
 
 Class Workshops – on 4/10 and two on 4/13, to promote IT field to non-IT college students.
 
-# Technologies Used
+## Technologies Used
 Processing for the game, Tableau for survey data analysis
 [Processing](https://processing.org/) is a Java sketchbook, [Tableau](https://www.tableau.com/trial/tableau-software?utm_campaign_id=2017049&utm_language=EN&utm_country=USCA&kw=tableau&adgroup=CTX-Brand-Priority-Core-E&adused=ETA&matchtype=e&placement=&d=7013y000000vYhH&cq_cmp=370186750&cq_net=s&cq_plac=&msclkid=26981524b0631c5b97b6717da3aecb8f&gclsrc=ds&gclsrc=ds) is a Business Intelligence tool
 
-# How to Use
+## How to Use
 With Processing installed:
 1. Dowload the repository as a ZIP
 2. Extract is to your desired location
